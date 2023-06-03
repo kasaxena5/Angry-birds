@@ -11,6 +11,9 @@ public class SceneLoader : MonoBehaviour
 
     [Header("Configs")]
     [SerializeField] SceneState sceneState = SceneState.Loaded;
+    [SerializeField] string animationEntryTrigger;
+    [SerializeField] string animationExitTrigger;
+    [SerializeField] float animationTime;
 
     public enum SceneState
     {
@@ -57,14 +60,14 @@ public class SceneLoader : MonoBehaviour
     {
         SetupLoadingCanvas();
 
-        yield return StartCoroutine(PlayAndWaitForLoadingAnimation("LoadEntryFade"));
+        yield return StartCoroutine(PlayAndWaitForLoadingAnimation(animationEntryTrigger));
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene);
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
         
-        yield return StartCoroutine(PlayAndWaitForLoadingAnimation("LoadExitFade"));
+        yield return StartCoroutine(PlayAndWaitForLoadingAnimation(animationExitTrigger));
 
         TearDownLoadingCanvas();
     }
@@ -74,7 +77,7 @@ public class SceneLoader : MonoBehaviour
         Animator animator = loadingCanvas.GetComponent<Animator>();
         animator.SetTrigger(clipName);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animationTime);
     }
 
 }
