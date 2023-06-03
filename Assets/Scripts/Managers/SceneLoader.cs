@@ -66,10 +66,15 @@ public class SceneLoader : MonoBehaviour
         {
             yield return null;
         }
-        
+        yield return StartCoroutine(WaitForLoadingContent());
         yield return StartCoroutine(PlayAndWaitForLoadingAnimation(animationExitTrigger));
 
         TearDownLoadingCanvas();
+    }
+
+    IEnumerator WaitForLoadingContent()
+    {
+        yield return new WaitForSeconds(animationTime);
     }
 
     IEnumerator PlayAndWaitForLoadingAnimation(string clipName)

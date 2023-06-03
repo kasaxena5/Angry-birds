@@ -38,7 +38,10 @@ public class LevelSelectManager : MonoBehaviour
     void OnClick(int i, int j)
     {
         int level = i * rows + j;
-        SceneLoader.Instance.StartScene("Level" + level + "Scene");
+        Debug.Log(i);
+        Debug.Log(j);
+        Debug.Log(level);
+        SceneLoader.Instance.StartScene("Level" + level.ToString() + "Scene");
     }
 
     void Awake()
