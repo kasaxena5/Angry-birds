@@ -10,21 +10,21 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private GameObject loadingCanvasPrefab;
 
     [Header("Configs")]
-    [SerializeField] private float loadTime = 1;
+    [SerializeField] SceneState sceneState = SceneState.Loaded;
 
     public enum SceneState
     {
         Loading,
         Loaded
     }
-    [Header("Scene States")]
-    public SceneState sceneState = SceneState.Loaded;
-    public string currentScene = "MainMenuScene";
 
+    public SceneState GetState()
+    {
+        return sceneState;
+    }
+    
 
     private GameObject loadingCanvas;
-    private CanvasGroup canvasGroup;
-    private AsyncOperation asyncOperation;
 
     private void Awake()
     {
@@ -34,51 +34,47 @@ public class SceneLoader : MonoBehaviour
             Instance = this;
     }
 
-    public void StartScene()
+    public void StartScene(string scene)
     {
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadScene(scene));
     }
 
     private void SetupLoadingCanvas()
     {
-        Instance.sceneState = SceneState.Loading;
+        sceneState = SceneState.Loading;
         loadingCanvas = Instantiate(loadingCanvasPrefab);
-        DontDestroyOnLoad(loadingCanvas);
-        canvasGroup = loadingCanvas.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
         loadingCanvas.SetActive(true);
     }
 
     private void TearDownLoadingCanvas()
     {
         loadingCanvas.SetActive(false);
-        Instance.sceneState = SceneState.Loaded;
+        sceneState = SceneState.Loaded;
         Destroy(loadingCanvas);
 
     }
-    IEnumerator LoadScene()
+    IEnumerator LoadScene(string scene)
     {
         SetupLoadingCanvas();
-        yield return StartCoroutine(fadeLoadingScreen(1, loadTime));
-        asyncOperation = SceneManager.LoadSceneAsync(Instance.currentScene);
+
+        yield return StartCoroutine(PlayAndWaitForLoadingAnimation("LoadEntryFade"));
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene);
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
-        yield return StartCoroutine(fadeLoadingScreen(0, loadTime));
+        
+        yield return StartCoroutine(PlayAndWaitForLoadingAnimation("LoadExitFade"));
+
         TearDownLoadingCanvas();
     }
 
-    IEnumerator fadeLoadingScreen(float targetValue, float duration)
+    IEnumerator PlayAndWaitForLoadingAnimation(string clipName)
     {
-        float startValue = canvasGroup.alpha;
-        float time = 0;
-        while (time < duration)
-        {
-            canvasGroup.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        canvasGroup.alpha = targetValue;
+        Animator animator = loadingCanvas.GetComponent<Animator>();
+        animator.SetTrigger(clipName);
+
+        yield return new WaitForSeconds(0.5f);
     }
+
 }
