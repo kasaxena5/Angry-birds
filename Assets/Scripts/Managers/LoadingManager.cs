@@ -21,7 +21,6 @@ public class LoadingManager : MonoBehaviour
     {
         string url = "https://api.chucknorris.io/jokes/random";
         webRequests.Get(url, OnSuccess, OnError);
-
     }
 
     class ChuckNorrisJoke
@@ -32,10 +31,7 @@ public class LoadingManager : MonoBehaviour
 
     void OnSuccess(string resultText)
     {
-        Debug.Log(resultText);
         ChuckNorrisJoke joke = webRequests.JsonDeserialize<ChuckNorrisJoke>(resultText);
-        Debug.Log(joke);
-
         jokeText.text = joke.value;
     }
 
@@ -43,7 +39,6 @@ public class LoadingManager : MonoBehaviour
     {
         Debug.Log(errorText);
     }
-
 
     void Start()
     {

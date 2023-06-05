@@ -2451,6 +2451,7 @@ MonoBehaviour:
   animationEntryTrigger: LoadEntryFade
   animationExitTrigger: LoadExitFade
   animationTime: 0.5
+  waitingTime: 1.5
 --- !u!114 &1821840053
 MonoBehaviour:
   m_ObjectHideFlags: 0

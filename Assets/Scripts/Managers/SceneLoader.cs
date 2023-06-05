@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] string animationEntryTrigger;
     [SerializeField] string animationExitTrigger;
     [SerializeField] float animationTime;
+    [SerializeField] float waitingTime;
 
     public enum SceneState
     {
@@ -74,7 +75,10 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator WaitForLoadingContent()
     {
-        yield return new WaitForSeconds(animationTime);
+        WebRequests loadingWebRequests = loadingCanvas.GetComponent<WebRequests>();
+        while (loadingWebRequests.GetState() == WebRequests.WebRequestState.Loading)
+            yield return null;
+        yield return new WaitForSeconds(waitingTime);
     }
 
     IEnumerator PlayAndWaitForLoadingAnimation(string clipName)
