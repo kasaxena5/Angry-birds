@@ -3,14 +3,15 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     [Header("Prefabs")]
-    [SerializeField] GameObject[] Menus;
-    private enum Menu
+    [SerializeField] Menu[] Menus;
+
+    private enum MenuItem
     {
         MainMenu,
         PlayerMenu
     }
     
-    private void LoadMenu(Menu menu)
+    private void LoadMenu(MenuItem menu)
     {
         for(int i = 0; i < Menus.Length; i++)
             Menus[i].SetActive(false);
@@ -19,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        LoadMenu(Menu.PlayerMenu);
+        LoadMenu(MenuItem.PlayerMenu);
     }
 
     public void LoadLevels()
@@ -34,7 +35,7 @@ public class MenuManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        LoadMenu(Menu.MainMenu);
+        LoadMenu(MenuItem.MainMenu);
     }
 
     public void QuitGame()
