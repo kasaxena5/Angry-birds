@@ -33,14 +33,12 @@ public class LevelSelectManager : MonoBehaviour
                 levelGrid[i, j].InitializeLevel(i * rows + j);
             }
         }
+        levelGrid[0, 0].Select();
     }
 
     void OnClick(int i, int j)
     {
         int level = i * rows + j;
-        Debug.Log(i);
-        Debug.Log(j);
-        Debug.Log(level);
         SceneLoader.Instance.StartScene("Level" + level.ToString() + "Scene");
     }
 

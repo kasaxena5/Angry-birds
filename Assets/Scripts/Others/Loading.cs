@@ -40,22 +40,33 @@ public class Loading : MonoBehaviour
 
     public delegate Vector2 ParametricFunction(float u, float t);
 
-    public enum ParametricFunctionName { Wave }
+    public enum ParametricFunctionName { LoadingCircle, StandingWave }
 
-    static ParametricFunction[] parametricFunctions = { Wave };
+    static ParametricFunction[] parametricFunctions = { LoadingCircle, StandingWave };
 
     public static ParametricFunction GetParametricFunction(ParametricFunctionName name)
     {
         return parametricFunctions[(int)name];
     }
 
-    public static Vector2 Wave(float u, float t)
+    public static Vector2 LoadingCircle(float u, float t)
     {
         Vector2 p;
         float A = 50f;
         float w = 0.25f;
         p.x = (A + (A/2) * Sin (PI * (u + w * t))) * Cos(PI * (u + w * t));
         p.y = (A + (A/2) * Sin(PI * (u + w * t))) * Sin(PI * (u + w * t));
+        return p;
+    }
+
+    public static Vector2 StandingWave(float u, float t)
+    {
+        Vector2 p;
+        float A = 400f;
+        float x = (u * 0.5f) + 0.5f * t;
+        float w = PerlinNoise(x, 0);
+        p.x = A * u;
+        p.y = A / 2 * w;
         return p;
     }
 }
