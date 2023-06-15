@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject loadingCanvasPrefab;
+    [SerializeField] private Event levelLoadedEvent;
 
     [Header("Configs")]
     [SerializeField] SceneState sceneState = SceneState.Loaded;
@@ -71,6 +72,8 @@ public class SceneLoader : MonoBehaviour
         yield return StartCoroutine(PlayAndWaitForLoadingAnimation(animationExitTrigger));
 
         TearDownLoadingCanvas();
+
+        levelLoadedEvent.RaiseEvent();
     }
 
     IEnumerator WaitForLoadingContent()

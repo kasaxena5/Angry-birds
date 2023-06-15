@@ -1909,6 +1909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvasPrefab: {fileID: 3469732527189311096, guid: e895708ca5a8fd143b28c0578435cf24, type: 3}
+  levelLoadedEvent: {fileID: 11400000, guid: 26c9a360fa3ef0048a2cf39970977f8c, type: 2}
   sceneState: 1
   animationEntryTrigger: LoadEntryFade
   animationExitTrigger: LoadExitFade
