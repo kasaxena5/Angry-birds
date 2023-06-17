@@ -71,14 +71,4 @@ public class PlayerController : MonoBehaviour
         initialPosition = rb.position;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
