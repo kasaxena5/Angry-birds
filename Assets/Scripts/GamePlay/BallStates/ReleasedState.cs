@@ -26,5 +26,9 @@ public class ReleasedState : IState
 
     public void UpdateState(Ball ball, BallStateManager ballStateManager)
     {
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ballStateManager.ChangeState(new BoostedState());
+        }
     }
 }

@@ -96,9 +96,10 @@ GameObject:
   - component: {fileID: 2439998581229791328}
   - component: {fileID: 2439998581229791331}
   - component: {fileID: 2439998581229791330}
-  - component: {fileID: 2439998581229791340}
+  - component: {fileID: 2088267999}
+  - component: {fileID: 2088268000}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +211,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2439998581229791340
+--- !u!114 &2088267999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,11 +220,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2439998581229791335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d7a6d43760e6324fba82cc561338292, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e9065acbf3d60748bce2eb241193d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  ejectSpeed: 3
+--- !u!114 &2088268000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439998581229791335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222d322f76891e447821eb9fc08f96df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  size: 0
+  mass: 0
+  ballReleasedEvent: {fileID: 11400000, guid: 391395271902c9d42b7af90db5105c70, type: 2}
+  ballExpiredEvent: {fileID: 11400000, guid: 8909aab8a67b7b543961c7710702d18c, type: 2}
+  ballHitEvent: {fileID: 11400000, guid: 22a15ae8d0ec5ff4a9330b0cfea485df, type: 2}
+  launchPad: {fileID: 0}
 --- !u!1 &7021290956332160862
 GameObject:
   m_ObjectHideFlags: 0

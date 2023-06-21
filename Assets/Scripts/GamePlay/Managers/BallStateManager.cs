@@ -8,7 +8,7 @@ public class BallStateManager : MonoBehaviour
     IState currentState;
     Ball ball;
 
-    ReadyState readyState = new();
+    NotReadyState notReadyState = new();
     void Awake()
     {
         ball = GetComponent<Ball>();    
@@ -16,7 +16,7 @@ public class BallStateManager : MonoBehaviour
 
     void Start()
     {
-        ChangeState(readyState);
+        ChangeState(notReadyState);
     }
 
     void Update()

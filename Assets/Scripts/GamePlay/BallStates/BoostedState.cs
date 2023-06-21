@@ -6,6 +6,7 @@ public class BoostedState : IState
 {
     public void OnEnter(Ball ball, BallStateManager ballStateManager)
     {
+        Debug.Log("Boosted");
     }
 
     public void OnExit(Ball ball, BallStateManager ballStateManager)

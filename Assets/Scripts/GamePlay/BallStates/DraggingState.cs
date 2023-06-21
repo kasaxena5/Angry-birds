@@ -23,7 +23,7 @@ public class DraggingState : IState
 
     public void OnMouseUp(Ball ball, BallStateManager ballStateManager)
     {
-        ball.MouseUp();
+        ball.Release();
         ballStateManager.ChangeState(new ReleasedState());
     }
 

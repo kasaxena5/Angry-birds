@@ -26,5 +26,7 @@ public class NotReadyState : IState
 
     public void UpdateState(Ball ball, BallStateManager ballStateManager)
     {
+        if (ball.IsReady)
+            ballStateManager.ChangeState(new ReadyState());
     }
 }
